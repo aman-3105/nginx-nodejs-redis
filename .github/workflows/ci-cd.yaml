@@ -1,0 +1,39 @@
+name: Run ci-cd-setup
+on: 
+    push
+
+jobs:
+    ci-cd-pipeline:
+        runs-on: self-hosted
+        steps:
+        -   name: Checkout repo
+            uses: actions/checkout@v4
+
+        -   name: Login to Docker Hub
+            uses: docker/login-action@v3
+            with:
+                username: aman3105
+                password: dOC@MAN3105
+
+        -   name: Build and push
+            uses: docker/build-push-action@v5
+            with:
+                push: true
+                context: ./nginx
+                tags: aman3105/nginx-nnr
+
+        -   name: Build and push
+            uses: docker/build-push-action@v5
+            with:
+                push: true
+                context: ./web
+                tags: aman3105/nodejs-nnr
+
+        -   name: Execute on kind cluster
+            run: kubectl apply -f mongo-depl.yaml -f mongo-svc.yaml -f flask-depl.yaml -f flask-svc.yaml -f nginx-depl.yaml
+
+        -   name: rollout
+            run: kubectl rollout restart deploy flask-depl mongo-depl nginx-depl
+
+        -   name: rollout status
+            run: kubectl rollout status deploy flask-depl mongo-depl nginx-depl
