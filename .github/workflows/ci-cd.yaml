@@ -33,7 +33,7 @@ jobs:
             run: kubectl apply -f redis-depl.yaml -f nodejs-svc1.yaml -f nodejs-svc2.yaml -f nodejs-depl.yaml -f redis-svc.yaml -f nginx-depl.yaml
 
         -   name: rollout
-            run: kubectl rollout restart deploy flask-depl mongo-depl nginx-depl
+            run: kubectl rollout restart deploy nodejs-depl redis-depl nginx-depl
 
         -   name: rollout status
-            run: kubectl rollout status deploy flask-depl mongo-depl nginx-depl
+            run: kubectl rollout status deploy nodejs-depl redis-depl nginx-depl
