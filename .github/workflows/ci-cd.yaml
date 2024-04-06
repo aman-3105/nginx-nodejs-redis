@@ -15,12 +15,12 @@ jobs:
                 username: aman3105
                 password: dOC@MAN3105
 
-        # -   name: Build and push
-        #     uses: docker/build-push-action@v5
-        #     with:
-        #         push: true
-        #         context: ./nginx
-        #         tags: aman3105/nginx-nnr
+        -   name: Build and push
+            uses: docker/build-push-action@v5
+            with:
+                push: true
+                context: ./nginx
+                tags: aman3105/nginx-nnr
 
         # -   name: Build and push
         #     uses: docker/build-push-action@v5
