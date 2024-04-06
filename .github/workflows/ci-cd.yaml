@@ -30,7 +30,7 @@ jobs:
                 tags: aman3105/nodejs-nnr
 
         -   name: Execute on kind cluster
-            run: kubectl apply -f mongo-depl.yaml -f mongo-svc.yaml -f flask-depl.yaml -f flask-svc.yaml -f nginx-depl.yaml
+            run: kubectl apply -f redis-depl.yaml -f nodejs-svc1.yaml -f nodejs-svc2.yaml -f nodejs-depl.yaml -f redis-svc.yaml -f nginx-depl.yaml
 
         -   name: rollout
             run: kubectl rollout restart deploy flask-depl mongo-depl nginx-depl
